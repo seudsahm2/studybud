@@ -1,0 +1,19 @@
+<div>
+  {% for room in rooms %}
+  <div>
+    {% if request.user == room.host %}
+    <a href="{% url 'update-room' room.id %}">Edit</a>
+    <a href="{% url 'delete-room' room.id %}">Delete</a>
+    {% endif%}
+
+    <a href="{% url 'user-profile' room.host.id %}">@{{room.host.username}}</a>
+    <!--<h5>{{room.id}} -- <a href="/room/{{room.id}}">{{room.name}}</a></h5> when we press the link it goes opens the room id as a dynamic url-->
+    <!--THE ABOVE IS commented due to this reason-->
+    <h5>{{room.id}} -- <a href="{% url 'room' room.id %}">{{room.name}}</a></h5>
+    <!--when routing we used the url name attribute not directly the url it self-->
+    <small>{{room.topic.name}}</small>
+    <hr />
+  </div>
+
+  {% endfor %}
+</div>
